@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // router なども使用することができる
-import { Route } from "react-router-dom";
+// import { Route } from "react-router-dom";
 
 /**
  * components
