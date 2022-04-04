@@ -1,8 +1,18 @@
 import React, { useRef } from 'react';
 
+/**
+ * css
+ */
+import './NewTodo.css';
 interface NewTodoProps {
   onAddTodo: (todoText: string) => void;
 }
+
+const clearInputs = () => {
+  const $input = document.querySelector('#todo-text')! as HTMLInputElement;
+
+  $input.value = '';
+};
 
 const NewTodo: React.FC<NewTodoProps> = (props) => {
   /**
@@ -14,16 +24,23 @@ const NewTodo: React.FC<NewTodoProps> = (props) => {
 
   const todoSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
+
     const enteredText = textInputRef.current!.value;
+
+    if (!enteredText) {
+      return;
+    }
+
     props.onAddTodo(enteredText);
+    clearInputs();
   };
   return (
-    <form onSubmit={todoSubmitHandler}>
+    <form onSubmit={todoSubmitHandler} id="form-control">
       <div>
         <label htmlFor="todo-text">Todoの内容</label>
         <input type="text" id="todo-text" ref={textInputRef} />
       </div>
-      <div>
+      <div id="add-btn">
         <button type="submit">Todoの追加</button>
       </div>
     </form>
